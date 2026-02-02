@@ -1,9 +1,12 @@
-# Hand Mouse Controller
+# ZeroTouch
 
-A Python application that turns your hand into a mouse pointer using your webcam. Control your computer with hand gestures in real-time.
+**ZeroTouch** is a futuristic, AI-powered gesture control application that turns your hands into a mouse! 👋🖱️
+
+📘 **[Read the User Guide](USER_GUIDE.md)** for detailed instructions.
 
 ## Features
-
+- **Touchless Control**: navigate your computer without touching a mouse.
+- **Dual Hand System**: Separte hands for moving and clicking for better precision.
 - Real-time hand tracking using MediaPipe
 - Smooth mouse pointer movement
 - Pinch gesture for left-click
