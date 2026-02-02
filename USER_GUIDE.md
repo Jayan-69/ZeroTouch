@@ -12,8 +12,8 @@ Welcome to **ZeroTouch**, your new gesture-controlled mouse assistant! This appl
 
 ZeroTouch uses a two-handed control scheme for maximum precision.
 
-### 🤚 Left Hand (Cursor & Scrolling)
-Use your **LEFT HAND** to move the mouse pointer and scroll pages.
+### 🤚 Right Hand (Cursor & Scrolling)
+Use your **RIGHT HAND** to move the mouse pointer and scroll pages.
 
 | Gesture | Action | Visual Feedback |
 | :--- | :--- | :--- |
@@ -24,15 +24,15 @@ Use your **LEFT HAND** to move the mouse pointer and scroll pages.
 
 **💡 Tip:** To move the cursor, simply point with your index finger and move your hand. The cursor follows your finger!
 
-### ✊ Right Hand (Clicking)
-Use your **RIGHT HAND** to click.
+### ✊ Left Hand (Clicking)
+Use your **LEFT HAND** to click.
 
 | Gesture | Action | Visual Feedback |
 | :--- | :--- | :--- |
 | **Open Hand** | *Ready to Click* | 🟠 Orange Skeleton |
 | **Make a Fist** | **Left Click** | 🔴 RED "CLICK!" |
 
-**💡 Tip:** To click, quickly close your right hand into a fist and then open it again.
+**💡 Tip:** To click, quickly close your left hand into a fist and then open it again.
 
 ## 🎯 Usage Tips
 
@@ -48,4 +48,4 @@ Use your **RIGHT HAND** to click.
 *   **App not closing**: Click the **'X'** on the window or press **'Q'** on your keyboard to quit.
 
 ---
-*Created with ❤️ by Jayan*
+*Created by Jayan*

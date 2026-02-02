@@ -281,8 +281,8 @@ class HandMouseController:
 
     def detect_gesture(self, hand_landmarks, hand_type):
         """Detect hand gesture and return action."""
-        if hand_type == 'Right':
-            # Right hand does clicking (fist gesture)
+        if hand_type == 'Left':
+            # Left hand does clicking (fist gesture)
             thumb_tip = hand_landmarks[THUMB_TIP]
             thumb_ip = hand_landmarks[THUMB_IP]
             wrist = hand_landmarks[WRIST]
@@ -317,13 +317,13 @@ class HandMouseController:
         screen_x = np.interp(index_x, (self.frameR, w - self.frameR), (0, SCREEN_WIDTH))
         screen_y = np.interp(index_y, (self.frameR, h - self.frameR), (0, SCREEN_HEIGHT))
         
-        # LEFT HAND: colorful fingers for cursor movement and scrolling
-        if hand_type == 'Left':
+        # RIGHT HAND: colorful fingers for cursor movement and scrolling
+        if hand_type == 'Right':
             # Count extended fingers
             extended_fingers = self.count_extended_fingers(hand_landmarks)
             
             # Show finger count for debugging
-            cv2.putText(frame, f"Left Hand - Fingers: {extended_fingers}", (50, 50), 
+            cv2.putText(frame, f"Right Hand - Fingers: {extended_fingers}", (50, 50), 
                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, WHITE, 2)
             
             current_time = time.time()
@@ -364,9 +364,9 @@ class HandMouseController:
                 cv2.putText(frame, "TOO MANY FINGERS", (index_x - 100, index_y - 30), 
                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (128, 128, 128), 2)
                 
-        # RIGHT HAND: clicking with fist
-        elif hand_type == 'Right':
-            cv2.putText(frame, "Right Hand - Click Mode", (50, 80), 
+        # LEFT HAND: clicking with fist
+        elif hand_type == 'Left':
+            cv2.putText(frame, "Left Hand - Click Mode", (50, 80), 
                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 128, 0), 2)
             
             try:
@@ -413,8 +413,8 @@ class HandMouseController:
                 end_point = (int(hand_landmarks[end_idx].x * w), 
                            int(hand_landmarks[end_idx].y * h))
                 
-                # Colorful for LEFT hand, orange for RIGHT hand
-                if hand_type == 'Left':
+                # Colorful for RIGHT hand, orange for LEFT hand
+                if hand_type == 'Right':
                     # Determine color based on which finger the connection belongs to
                     if start_idx in thumb_landmarks or end_idx in thumb_landmarks:
                         color = finger_colors['thumb']
@@ -431,15 +431,15 @@ class HandMouseController:
                     
                     cv2.line(frame, start_point, end_point, color, 3)
                 else:
-                    # Simple orange for right hand
+                    # Simple orange for left hand
                     cv2.line(frame, start_point, end_point, (255, 128, 0), 2)
         
         # Draw landmarks with colors
         for idx, landmark in enumerate(hand_landmarks):
             x, y = int(landmark.x * w), int(landmark.y * h)
             
-            if hand_type == 'Left':
-                # Colorful landmarks for left hand
+            if hand_type == 'Right':
+                # Colorful landmarks for right hand
                 if idx in thumb_landmarks:
                     color = finger_colors['thumb']
                 elif idx in index_landmarks:
@@ -460,7 +460,7 @@ class HandMouseController:
                 else:
                     cv2.circle(frame, (x, y), 7, color, -1)
             else:
-                # Simple orange for right hand
+                # Simple orange for left hand
                 color = (255, 128, 0)
                 if idx in [4, 8, 12, 16, 20]:
                     cv2.circle(frame, (x, y), 10, color, -1)
@@ -474,8 +474,8 @@ class HandMouseController:
         """Run the hand mouse controller."""
         print("Starting ZeroTouch...")
         print("="*60)
-        print("LEFT HAND: 1 finger = move, 2 fingers = scroll down, 3+ fingers = scroll up")
-        print("RIGHT HAND: Make a fist to click")
+        print("RIGHT HAND: 1 finger = move, 2 fingers = scroll down, 3+ fingers = scroll up")
+        print("LEFT HAND: Make a fist to click")
         print("="*60)
         print("Press 'Q' to quit")
         print("\nCamera initialized successfully! Window should appear now...")
