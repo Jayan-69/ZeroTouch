@@ -69,38 +69,7 @@ HandLandmarker = mp.tasks.vision.HandLandmarker
 HandLandmarkerOptions = mp.tasks.vision.HandLandmarkerOptions
 VisionRunningMode = mp.tasks.vision.RunningMode
 
-def download_model():
-    """Download the hand landmarker model if it doesn't exist."""
-    model_url = 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task'
-    model_path = 'hand_landmarker.task'
-    
-    if not os.path.exists(model_path):
-        print("Downloading hand landmarker model...")
-        urllib.request.urlretrieve(model_url, model_path)
-        print("Model downloaded successfully!")
-    
-    return model_path
-
-# Download the model if needed
-model_path = download_model()
-
-# Configure hand landmarker options
-try:
-    options = HandLandmarkerOptions(
-        base_options=BaseOptions(model_asset_path=model_path),
-        running_mode=VisionRunningMode.VIDEO,
-        num_hands=2,
-        min_hand_detection_confidence=0.7,
-        min_hand_presence_confidence=0.5,
-        min_tracking_confidence=0.5
-    )
-
-    # Create hand landmarker
-    hand_landmarker = HandLandmarker.create_from_options(options)
-except Exception as e:
-    print(f"Error initializing hand landmarker: {e}")
-    print("Please make sure you have an internet connection to download the model.")
-    exit(1)
+# Hand connections for drawing
 
 # Hand connections for drawing
 HAND_CONNECTIONS = [
@@ -138,6 +107,16 @@ MIDDLE_FINGER_TIP = 12
 RING_FINGER_TIP = 16
 PINKY_TIP = 20
 WRIST = 0
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class HandMouseController:
     def __init__(self):
@@ -193,7 +172,7 @@ class HandMouseController:
         
         # Create a hand landmarker instance with the live stream mode
         options = hand_landmarker_options(
-            base_options=base_options(model_asset_path='hand_landmarker.task'),
+            base_options=base_options(model_asset_path=resource_path('hand_landmarker.task')),
             running_mode=vision_running_mode.LIVE_STREAM,
             num_hands=2,
             min_hand_detection_confidence=0.5,
