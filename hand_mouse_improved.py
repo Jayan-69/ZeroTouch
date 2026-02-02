@@ -493,7 +493,7 @@ class HandMouseController:
 
     def run(self):
         """Run the hand mouse controller."""
-        print("Starting Hand Mouse Controller...")
+        print("Starting ZeroTouch...")
         print("="*60)
         print("LEFT HAND: 1 finger = move, 2 fingers = scroll down, 3+ fingers = scroll up")
         print("RIGHT HAND: Make a fist to click")
@@ -589,7 +589,7 @@ class HandMouseController:
                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, border_color, 2)
                 
                 # Display the frame
-                cv2.imshow('Hand Mouse Controller', frame)
+                cv2.imshow('ZeroTouch', frame)
                 
                 # Handle key press (wait 1ms for events to be processed)
                 key = cv2.waitKey(1) & 0xFF
@@ -598,7 +598,7 @@ class HandMouseController:
                 
                 # Check if window was closed (X button clicked)
                 # We check this AFTER waitKey because waitKey processes the GUI events
-                if cv2.getWindowProperty('Hand Mouse Controller', cv2.WND_PROP_VISIBLE) < 1:
+                if cv2.getWindowProperty('ZeroTouch', cv2.WND_PROP_VISIBLE) < 1:
                     break
                     
         except KeyboardInterrupt:
